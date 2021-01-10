@@ -12,14 +12,14 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
 {
         ClearScreen();
         FString HiddenWord = TEXT("cake");
-        PrintLine(Input);
+
         if (Input == HiddenWord)
         {
-            PrintLine("Right Word");
+            PrintLine(TEXT("Right Word"));
         }
         else
         {
-            PrintLine("Wrong Word try again!");
+            PrintLine(TEXT("Wrong Word try again!"));
         }
         
 }
