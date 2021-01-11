@@ -16,31 +16,28 @@ void UBullCowCartridge::BeginPlay() // When the game starts
 void UBullCowCartridge::OnInput(const FString& Input) // When the player hits enter
 {
 
-    /* 
-        if game is over then ClearScreen() and RestartGame()
-        else Checking PlayerGuess
-    */
-        if bGameOver
+    
+        if (bGameOver)
         {
             ClearScreen();
             SetupGame();
         }
-        else
+
+        else //Checking PlayerGuess
         {
             if (Input == HiddenWord)
-        {
-            PrintLine(TEXT("Right Word"));
-            //bGameOver = true;
-        }
+            {
+                PrintLine(TEXT("Right Word"));
+                EndGame();
+            }
             else
             {
                 if (Input.Len() != HiddenWord.Len())
                 {
                     PrintLine(TEXT("The Hidden Word is %i characters long, try again! "),HiddenWord.Len());
+                    EndGame();
                 }
-                
-                PrintLine(TEXT("Wrong Word try again!"));
-                //bGameOver = true;
+                  
             }
         }
         
@@ -78,7 +75,7 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
             PrintLine(TEXT("Type your guess and \npress Enter to continue...."));// Prompt Player Guess
         }
 
-        void UBullCartridge::EndGame()
+        void UBullCowCartridge::EndGame()
         {
             bGameOver = true;
             PrintLine(TEXT("Press enter to play again..."));
