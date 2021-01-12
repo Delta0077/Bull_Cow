@@ -14,10 +14,7 @@ void UBullCowCartridge::BeginPlay() // When the game starts
 }
 
 void UBullCowCartridge::OnInput(const FString& Input) // When the player hits enter
-{
-
-    
-                
+{          
         if (bGameOver)
         {
             ClearScreen();
@@ -27,18 +24,9 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
         else //Checking PlayerGuess
         {
             ProcessGuess(Input);
-            
         }
-        
-
-        
-       
-
-       
-
-        
+      
 }
-
         void UBullCowCartridge::SetupGame()
         {
             // Welcoming the player
