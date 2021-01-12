@@ -17,11 +17,12 @@ class BULLCOWGAME_API UBullCowCartridge : public UCartridge
 	void SetupGame();
 	void EndGame();
 	void ProcessGuess(FString Guess);
+	bool bIsIsogram();
 
 	// Your declarations go below!
 	private:
 	FString HiddenWord;
 	int32 Lives;
 	bool bGameOver;
+	
 };
-
