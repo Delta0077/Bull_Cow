@@ -17,6 +17,7 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
 {
 
     
+                
         if (bGameOver)
         {
             ClearScreen();
@@ -32,12 +33,23 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
             }
             else
             {
+                --Lives;
+                PrintLine(TEXT("You lost a life!"));
+                if(Lives > 0)
+            {
                 if (Input.Len() != HiddenWord.Len())
                 {
-                    PrintLine(TEXT("The Hidden Word is %i characters long, try again! "),HiddenWord.Len());
-                    EndGame();
+                    PrintLine(TEXT("Sorry , try again! \nYou have %i lives left "), Lives);                   
                 }
                   
+            }
+            else
+            {
+                    PrintLine(TEXT("You have no lives left! "));
+                    EndGame();
+            }
+            
+            
             }
         }
         
@@ -50,8 +62,8 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
         // Prompt to Guess Again
         
         // Remove Life
-
         // Check if Lives > 0
+            
         // If yes GuessAgain
         // Show Lives left
         // If no show GameOver and HiddenWord
@@ -68,11 +80,12 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
             PrintLine(TEXT("Welcome to Bull Cows...."));
             
             HiddenWord = TEXT("cakes");  // Set the HiddenWord
-            Lives = 4; // Set Lives
+            Lives = HiddenWord.Len(); // Set Lives
             bGameOver = false;
             
             PrintLine(TEXT("Guess the %i letter word...."), HiddenWord.Len());
-            PrintLine(TEXT("Type your guess and \npress Enter to continue...."));// Prompt Player Guess
+            PrintLine(TEXT("Lives left = %i"), Lives);
+            PrintLine(TEXT("Type your guess and \npress Enter to continue...."));// Prompt Player Guess                
         }
 
         void UBullCowCartridge::EndGame()
