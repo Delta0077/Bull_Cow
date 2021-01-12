@@ -89,7 +89,7 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
         PrintLine(TEXT("Try guessing again, you have %i lives left"), Lives);
 }
 
-bool UBullCowCartridge::bIsIsogram(FString Word)
+bool UBullCowCartridge::bIsIsogram(FString Word) const
 {
 
 
