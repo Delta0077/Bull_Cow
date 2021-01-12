@@ -33,19 +33,7 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
 
         
        
-        // Check If Isogram
-        // Prompt to Guess Again
-        // Check Right Number of Characters
-        // Prompt to Guess Again
-        
-        // Remove Life
-        // Check if Lives > 0
-            
-        // If yes GuessAgain
-        // Show Lives left
-        // If no show GameOver and HiddenWord
-        // Prompt yo PlayAgain, Press Enter to Play Again
-        // Check user Input
+
        
 
         
@@ -72,29 +60,39 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
         }
 
         void UBullCowCartridge::ProcessGuess(FString Guess)
-        {
+{
             if (Guess == HiddenWord)
             {
                 PrintLine(TEXT("Right Word"));
                 EndGame();
+                return;
             }
-            else
-            {
-                 PrintLine(TEXT("You lost a life!"), --Lives);
-                if(Lives > 0)
-            {
+
+                /* // Check If Isogram
+                if(!IsIsogram)
+                */
                 if (Guess.Len() != HiddenWord.Len())
                 {
-                    PrintLine(TEXT("Sorry , try again! \nYou have %i lives left "), Lives);                   
+                    PrintLine(TEXT("The hidden word is %i letters long"), HiddenWord.Len());
+                    PrintLine(TEXT("Sorry , try again! \nYou have %i lives left "), Lives);  
+                    return;                 
                 }
-                  
-            }
-            else
-            {
-                    PrintLine(TEXT("You have no lives left! "));
-                    EndGame();
-            }
-            
-            
-            }
-        }
+                
+                
+                // Remove Life
+
+                    PrintLine(TEXT("You lost a life!"));
+                    --Lives;
+
+                    if (Lives <= 0)
+                    {    
+                        ClearScreen();
+                        PrintLine(TEXT("You have no lives left!"));
+                        PrintLine(TEXT("The hidden word was: %s"), *HiddenWord);
+                        EndGame();
+                        return;
+                    }
+                   
+                //Show the player Bulls and Cows
+                PrintLine(TEXT("Try guessing again, you have %i lives left"), Lives);
+}
