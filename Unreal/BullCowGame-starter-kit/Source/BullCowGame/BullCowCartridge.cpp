@@ -38,8 +38,8 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
         PrintLine(TEXT("Lives left = %i"), Lives);
         PrintLine(TEXT("Type your guess and \npress Enter to continue...."));// Prompt Player Guess   
 
-        const TCHAR HW[] = TEXT("cakes");     
-        PrintLine(TEXT("character 1 of the hidden word is: %c"), HiddenWord[0]);    
+        /* const TCHAR HW[] = TEXT("cakes");     
+        PrintLine(TEXT("character 1 of the hidden word is: %c"), HiddenWord[0]); */    
     }
 
     void UBullCowCartridge::EndGame()
@@ -50,45 +50,46 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
 
     void UBullCowCartridge::ProcessGuess(FString Guess)
 {
-        if (Guess == HiddenWord)
-        {
+    if (Guess == HiddenWord)
+    {
         PrintLine(TEXT("Right Word"));
         EndGame();
         return;
-        }
-        // Check If Isogram
-        if(!bIsIsogram())
-        {
-                    
-        PrintLine(TEXT("No repeating letters, guess again"))
-        return;
-        }
+    }
                
-        if (Guess.Len() != HiddenWord.Len())
-        {
+    if (Guess.Len() != HiddenWord.Len())
+    {
         PrintLine(TEXT("The hidden word is %i letters long"), HiddenWord.Len());
         PrintLine(TEXT("Sorry , try again! \nYou have %i lives left "), Lives);  
         return;                 
-        }
-                
+    }
+
+        // Check If Isogram
+    if(!bIsIsogram(Guess))
+    {
+                    
+        PrintLine(TEXT("No repeating letters, guess again"));
+        return;
+    }
+               
         // Remove Life
 
         PrintLine(TEXT("You lost a life!"));
         --Lives;
 
-        if (Lives <= 0)
-        {    
+    if (Lives <= 0)
+    {    
         ClearScreen();
         PrintLine(TEXT("You have no lives left!"));
         PrintLine(TEXT("The hidden word was: %s"), *HiddenWord);
         EndGame();
         return;
-        }
+    }
         //Show the player Bulls and Cows
         PrintLine(TEXT("Try guessing again, you have %i lives left"), Lives);
 }
 
-bool UBullCowCartridge::bIsIsogram()
+bool UBullCowCartridge::bIsIsogram(FString Word)
 {
 
 
