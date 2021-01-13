@@ -39,7 +39,7 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
         PrintLine(TEXT("Type your guess and \npress Enter to continue...."));// Prompt Player Guess   
 
         /* const TCHAR HW[] = TEXT("cakes");     
-        PrintLine(TEXT("character 1 of the hidden word is: %c"), HiddenWord[0]); */    
+        PrintLine(TEXT("character 1 of the hidden word is: %c"), HiddenWord[0]); */           
     }
 
     void UBullCowCartridge::EndGame()
@@ -59,8 +59,8 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
                
     if (Guess.Len() != HiddenWord.Len())
     {
-        PrintLine(TEXT("The hidden word is %i letters long"), HiddenWord.Len());
-        PrintLine(TEXT("Sorry , try again! \nYou have %i lives left "), Lives);  
+        PrintLine(TEXT("The hidden word is %i letters long."), HiddenWord.Len());
+        PrintLine(TEXT("Sorry , try again! \nYou have %i lives left. "), Lives);  
         return;                 
     }
 
@@ -68,7 +68,7 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
     if(!bIsIsogram(Guess))
     {
                     
-        PrintLine(TEXT("No repeating letters, guess again"));
+        PrintLine(TEXT("No repeating letters, guess again!"));
         return;
     }
                
@@ -89,9 +89,19 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
         PrintLine(TEXT("Try guessing again, you have %i lives left"), Lives);
 }
 
-bool UBullCowCartridge::bIsIsogram(FString Word) const
+    bool UBullCowCartridge::bIsIsogram(FString Word) const
 {
+        
+        for(int32 Index = 0; Index < Word.Len(); Index++)
+            {
+                for(int32 Compare = Index + 1; Compare < Word.Len(); Compare++)
+                {
 
-
-    return true;
+                if(Word[Index] == Word[Compare])
+                {
+                    return false;
+                }
+                }
+            }
+            return true;
 }
