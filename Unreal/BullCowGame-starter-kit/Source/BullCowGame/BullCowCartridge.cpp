@@ -11,6 +11,7 @@ void UBullCowCartridge::BeginPlay() // When the game starts
     
     SetupGame();
 
+    PrintLine(TEXT("The number of possible word is %i"), Words.Num());
     PrintLine(TEXT("The Hidden Word is: %s"),*HiddenWord);  //  Debug line
 }
 
