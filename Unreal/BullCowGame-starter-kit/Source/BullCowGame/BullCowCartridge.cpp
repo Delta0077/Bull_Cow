@@ -8,12 +8,13 @@ void UBullCowCartridge::BeginPlay() // When the game starts
 {
     
     Super::BeginPlay();
+
+    Isograms = GetValidWords(Words);
     
     SetupGame();
 
-    PrintLine(TEXT("The number of possible word is %i"), Words.Num());
-    PrintLine(TEXT("The number of valid words is: %i."), GetValidWords(Words).Num());
-    PrintLine(TEXT("The Hidden Word is: %s"),*HiddenWord);  //  Debug line
+    
+    
    
 }
 
@@ -34,16 +35,15 @@ void UBullCowCartridge::OnInput(const FString& PlayerInput) // When the player h
         // Welcoming the player
         PrintLine(TEXT("Welcome to Bull Cows...."));
             
-        HiddenWord = TEXT("cakes");  // Set the HiddenWord
+        HiddenWord = Isograms[FMath::RandRange(0, Isograms.Num() - 1)];  // Set the HiddenWord
         Lives = HiddenWord.Len(); // Set Lives
         bGameOver = false;
             
         PrintLine(TEXT("Guess the %i letter word...."), HiddenWord.Len());
         PrintLine(TEXT("Lives left = %i"), Lives);
-        PrintLine(TEXT("Type your guess and \npress Enter to continue...."));// Prompt Player Guess   
-
-        /* const TCHAR HW[] = TEXT("cakes");     
-        PrintLine(TEXT("character 1 of the hidden word is: %c"), HiddenWord[0]); */           
+        PrintLine(TEXT("Type your guess and \npress Enter to continue...."));// Prompt Player Guess 
+        PrintLine(TEXT("The Hidden Word is: %s"),*HiddenWord);  //  Debug line  
+                   
     }
 
     void UBullCowCartridge::EndGame()
