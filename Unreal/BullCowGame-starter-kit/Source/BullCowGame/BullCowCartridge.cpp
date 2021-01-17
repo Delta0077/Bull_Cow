@@ -90,6 +90,11 @@ void UBullCowCartridge::OnInput(const FString& PlayerInput) // When the player h
         return;
     }
         //Show the player Bulls and Cows
+        int32 Bulls, Cows;
+        GetBullCows(Guess, Bulls, Cows);
+
+        PrintLine(TEXT("You have %i Bulls and %i Cows"), Bulls, Cows);
+
         PrintLine(TEXT("Try guessing again, you have %i lives left"), Lives);
 }
 
@@ -122,5 +127,21 @@ TArray<FString> UBullCowCartridge::GetValidWords(const TArray<FString>& WordList
         }
     }
     return ValidWords;
+
+}
+
+void UBullCowCartridge::GetBullCows(const FString& Guesse, int32 BullCount, int32 CowCount)
+{
+    BullCount = 0;
+    CowCount = 0;
+
+    // for every index of guess is same as the index of HiddenWord, BullCount++
+    // if not a Bull was it a cow? if yes CowCount++
+
+    for (int32 i = 0; i < count; i++)
+    {
+        /* code */
+    }
+    
 
 }
